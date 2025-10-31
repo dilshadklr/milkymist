@@ -20,13 +20,13 @@
     /* Navbar */
     .navbar {
       display: flex;
+      flex-direction: row;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       background-color: #fff;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      padding: 0 24px;
+      padding: 0 20px;
       height: 60px;
-      gap: 40px;
       position: sticky;
       top: 0;
       z-index: 999;
@@ -39,9 +39,17 @@
 
     .navbar-links {
       display: flex;
-      gap: 45px;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: row;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: #000;
     }
 
     .dropdown {
@@ -196,8 +204,36 @@
       font-size: 0.9rem;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1200px) {
+      .navbar-links { gap: 30px; }
+    }
+
+    @media (max-width: 992px) {
       .navbar-links { gap: 20px; }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+      }
+      .navbar-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        padding: 10px 0;
+        text-align: center;
+      }
+      .navbar-links.active {
+        display: flex;
+      }
+      .navbar-buy {
+        display: none;
+      }
       .card img { height: 160px; }
       h1 { font-size: 2rem !important; }
     }
@@ -229,6 +265,8 @@
       <div class="dropdown"><a href="#">Investors</a></div>
       <div class="dropdown"><a href="#">Contact</a></div>
     </div>
+
+    <div class="hamburger" onclick="toggleMenu()">☰</div>
 
     <a href="#" class="navbar-buy">Buy Now</a>
   </nav>
@@ -266,7 +304,7 @@
       Milky Mist is dedicated to spreading the daily dose of nutrition - all day, every day. From being the initial <br>ingredient to delivering the finishing touch, we make sure our products add the nutritional value you deserve.<br>
       <b>With our range of 400+ SKU's, we're committed to making India, a healthy India.</b>
     </p>
-    <a href="#" class="btn btn-outline-dark px-4 py-2" style="border-radius:20px;">View All Products</a>
+    <a href="mmproduct.html" class="btn btn-outline-dark px-4 py-2" style="border-radius:20px;">View All Products</a>
   </div>
 
   <!-- Moving Marquee -->
@@ -337,6 +375,11 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
+
+    function toggleMenu() {
+      const navbarLinks = document.querySelector('.navbar-links');
+      navbarLinks.classList.toggle('active');
+    }
   </script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </body>
